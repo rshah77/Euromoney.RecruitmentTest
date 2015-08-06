@@ -52,18 +52,6 @@ namespace ContentConsole
             return returnList;
         }
 
-        /**Story 3**/
-        public static string hashBadWord(string badword)
-        {
-            char[] word = badword.ToCharArray();
-            for (int i = 1; i < word.Count() - 1; i++)
-            {
-                word[i] = '#';
-            }
-            return new string(word);
-        }
-
-
     }
 
     
