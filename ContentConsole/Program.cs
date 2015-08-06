@@ -1,44 +1,72 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ContentConsole
 {
-    public static class Program
+    public class Program
     {
+        public Program() { }
+
         public static void Main(string[] args)
         {
-            string bannedWord1 = "swine";
-            string bannedWord2 = "bad";
-            string bannedWord3 = "nasty";
-            string bannedWord4 = "horrible";
+            string[] bannedWords = { "swine", "bad", "nasty", "horrible" };
 
-            string content =
-                "The weather in Manchester in winter is bad. It rains all the time - it must be horrible for people visiting.";
+            string content = "The weather in Manchester in winter is bad. It rains all the time - it must be horrible for people visiting.";
 
+            List<string> listOfBadWordsInPhrase = new List<string>();
             int badWords = 0;
-            if (content.Contains(bannedWord1))
+            foreach (var badWord in bannedWords)
             {
-                badWords = badWords + 1;
-            }
-            if (content.Contains(bannedWord2))
-            {
-                badWords = badWords + 1;
-            }
-            if (content.Contains(bannedWord3))
-            {
-                badWords = badWords + 1;
-            }
-            if (content.Contains(bannedWord4))
-            {
-                badWords = badWords + 1;
+                if (content.Contains(badWord))
+                {
+                    badWords++;
+                    listOfBadWordsInPhrase.Add(badWord);
+                    content = content.Replace(badWord, hashBadWord(badWord));
+                }
             }
 
-            Console.WriteLine("Scanned the text:");
-            Console.WriteLine(content);
-            Console.WriteLine("Total Number of negative words: " + badWords);
+            System.Diagnostics.Debug.WriteLine("Scanned the text:");
+            System.Diagnostics.Debug.WriteLine(content);
+            System.Diagnostics.Debug.WriteLine("Total Number of negative words: " + badWords);
 
-            Console.WriteLine("Press ANY key to exit.");
-            Console.ReadKey();
+            System.Diagnostics.Debug.WriteLine("Press ANY key to exit.");
+
         }
+
+        /**Story 3**/
+        public static List<string> hashOutBadWords(List<string> listOfBadWordsInPhrase)
+        {
+            List<string> returnList = new List<string>();
+            foreach (var word in listOfBadWordsInPhrase)
+            {
+                char[] badword = word.ToCharArray();
+                for (int i = 1; i < badword.Count() - 1; i++)
+                {
+                    badword[i] = '#';
+                }
+                returnList.Add(new string(badword));
+            }
+
+            return returnList;
+        }
+
+        /**Story 3**/
+        public static string hashBadWord(string badword)
+        {
+            char[] word = badword.ToCharArray();
+            for (int i = 1; i < word.Count() - 1; i++)
+            {
+                word[i] = '#';
+            }
+            return new string(word);
+        }
+
+
     }
+
+    
+
 
 }
