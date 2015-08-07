@@ -6,11 +6,28 @@ using System.Threading.Tasks;
 
 namespace ContentConsole
 {
-    class BannedWordsDictionary
+    public class BannedWordsDictionary
     {
-        protected List<string> ListOfBannedWords;
+        //Global List of Banned Words
+        public List<string> ListOfBannedWords;
 
-        public BannedWordsDictionary() { }
+        //constructor
+        public BannedWordsDictionary() 
+        {
+            this.defaultWordsInDictionary();
+        }
+        
+        //Adding some default banned words to Dictionary
+        public void defaultWordsInDictionary()
+        {
+            ListOfBannedWords = new List<string>() 
+            {
+                "swine", 
+                "bad", 
+                "nasty", 
+                "horrible"
+            };
+        }
 
         //Check If Banned Word Exists
         public bool checkIfBannedWordExists(string bannedWord)
@@ -43,12 +60,26 @@ namespace ContentConsole
             char[] word = bannedword.ToCharArray();
             for (int i = 1; i < word.Count() - 1; i++)
             {
-                word[i] = '#';
+                word[i] = '#';  
             }
             return new string(word);
         }
 
+        /**Story 3**/
+        public List<string> hashOutBadWords(List<string> listOfBadWordsInPhrase)
+        {
+            List<string> returnList = new List<string>();
+            foreach (var word in listOfBadWordsInPhrase)
+            {
+                char[] badword = word.ToCharArray();
+                for (int i = 1; i < badword.Count() - 1; i++)
+                {
+                    badword[i] = '#';
+                }
+                returnList.Add(new string(badword));
+            }
 
-
+            return returnList;
+        }
     }
 }
