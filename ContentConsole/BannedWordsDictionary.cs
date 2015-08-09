@@ -9,12 +9,15 @@ namespace ContentConsole
     public class BannedWordsDictionary
     {
         //Global List of Banned Words
-        public List<string> ListOfBannedWords;
+        public List<string> ListOfBannedWords = new List<string>();
 
         //constructor
         public BannedWordsDictionary() 
         {
-            this.defaultWordsInDictionary();
+            if (ListOfBannedWords.Count() == 0)
+            {
+                this.defaultWordsInDictionary();
+            }
         }
         
         //Adding some default banned words to Dictionary
@@ -40,12 +43,24 @@ namespace ContentConsole
         public string addNewWord(string bannedWord) 
         {
             string newWordStatus = "wordExists";
-            if (checkIfBannedWordExists(bannedWord))
+            if (!checkIfBannedWordExists(bannedWord))
             {
                 ListOfBannedWords.Add(bannedWord);
                 newWordStatus = "wordAdded";
             }
             return newWordStatus;
+        }
+
+        //Remove Word to Banned word dictionary 
+        public string removeNegWord(string bannedWord)
+        {
+            string wordstatus = "wordNotExist";
+            if (checkIfBannedWordExists(bannedWord))
+            {
+                ListOfBannedWords.Remove(bannedWord);
+                wordstatus = "wordRemoved";
+            }
+            return wordstatus;
         }
 
         //Get Total Count of Banned words

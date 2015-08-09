@@ -9,16 +9,50 @@ namespace ContentConsole
     public class Phrases
     {
         //Global List Of Phrases
-        private List<string> ListOfPhrasesInsertedByUsers = new List<string>();
+        private List<string> ListOfPhrases = new List<string>();
+        private List<string> ListOfHashedPhrases = new List<string>();
+        BannedWordsDictionary dwDict = new BannedWordsDictionary();
 
         //constructor
         public Phrases() { }
 
-        //Get the list of Phrases
+        //Get the list of Phrases   
         //returns the Global List of phrases entered by users
         public List<string> getListOfPhrases() 
         {
-            return ListOfPhrasesInsertedByUsers;
+            return ListOfPhrases;
+        }
+
+        //
+        public List<string> getListOfHashedPhrases()
+        {
+            return ListOfHashedPhrases;
+        }
+
+        public string addHashedPhrase(string phrase) 
+        {
+            //uncomment the below line when running unit test
+            //dwDict.defaultWordsInDictionary();
+            var bannedWords = dwDict.ListOfBannedWords;
+            foreach (var badWord in bannedWords)
+            {
+                if (phrase.ToLower().Contains(badWord))
+                {
+                    phrase = phrase.ToLower().Replace(badWord, new BannedWordsDictionary().hashBannedWord(badWord));
+                }
+            }
+            return phrase;
+            //ListOfHashedPhrases.Add(phrase);
+        }
+
+        public List<string> sensitizePhrasesForReaders() 
+        {
+            ListOfHashedPhrases = new List<string>();
+            foreach (var phrase in ListOfPhrases) 
+            {
+                ListOfHashedPhrases.Add(addHashedPhrase(phrase));
+            }
+            return ListOfHashedPhrases;
         }
 
         //Adds a new phrase to the list of global list of phrases
@@ -26,39 +60,38 @@ namespace ContentConsole
         //or return false: if phrases is not added; that means phrase already exists
         public bool addPhraseToList(string phrase) 
         {
-            List<string> ListOfPhrasesInsertedByUsers = getListOfPhrases();
+            //List<string> ListOfPhrasesInsertedByUsers = getListOfPhrases();
 
-            if (ListOfPhrasesInsertedByUsers.Count > 0) 
+            if (ListOfPhrases.Count > 0) 
             {
-                if (!ListOfPhrasesInsertedByUsers.Contains(phrase))
+                if (!ListOfPhrases.Contains(phrase))
                 {
-                    ListOfPhrasesInsertedByUsers.Add(phrase);
+                    ListOfPhrases.Add(phrase);
                     return true;
                 }
             }
             else
             {
-                ListOfPhrasesInsertedByUsers.Add(phrase);
+                ListOfPhrases.Add(phrase);
                 return true;
             }
             return false;
         }
 
-        public int CountBannedWordsInPhrase(string phrase) 
+        public int AnalayseAndCountNegWordsInPhrase(string phrase) 
         {
             int bannedWordsCounted = 0;
-            BannedWordsDictionary dwDict = new BannedWordsDictionary();
-            var bannedWords = dwDict.ListOfBannedWords;
+            
+            var bannedWords = new BannedWordsDictionary().ListOfBannedWords;
             foreach (var badWord in bannedWords)
             {
-                if (phrase.Contains(badWord))
+                if (phrase.ToLower().Contains(badWord))
                 {
                     bannedWordsCounted++;
                     //listOfBadWordsInPhrase.Add(badWord);
                     //phrase = phrase.Replace(badWord, new BannedWordsDictionary().hashBannedWord(badWord));
                 }
             }
-
             return bannedWordsCounted;
         }
     }
