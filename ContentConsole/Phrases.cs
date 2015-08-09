@@ -23,12 +23,7 @@ namespace ContentConsole
             return ListOfPhrases;
         }
 
-        //
-        public List<string> getListOfHashedPhrases()
-        {
-            return ListOfHashedPhrases;
-        }
-
+        //Gets the list of Banned words and checks the phrase parameter for any occurance of Banned words
         public string addHashedPhrase(string phrase) 
         {
             //uncomment the below line when running unit test
@@ -42,9 +37,9 @@ namespace ContentConsole
                 }
             }
             return phrase;
-            //ListOfHashedPhrases.Add(phrase);
         }
 
+        //
         public List<string> sensitizePhrasesForReaders() 
         {
             ListOfHashedPhrases = new List<string>();

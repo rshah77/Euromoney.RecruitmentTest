@@ -42,11 +42,11 @@ namespace ContentConsole
         //Add new Word to Banned word dictionary 
         public string addNewWord(string bannedWord) 
         {
-            string newWordStatus = "wordExists";
+            string newWordStatus = "Word Exists";
             if (!checkIfBannedWordExists(bannedWord))
             {
                 ListOfBannedWords.Add(bannedWord);
-                newWordStatus = "wordAdded";
+                newWordStatus = "Word Added";
             }
             return newWordStatus;
         }
@@ -54,11 +54,11 @@ namespace ContentConsole
         //Remove Word to Banned word dictionary 
         public string removeNegWord(string bannedWord)
         {
-            string wordstatus = "wordNotExist";
+            string wordstatus = "Word Doesn't Exist";
             if (checkIfBannedWordExists(bannedWord))
             {
                 ListOfBannedWords.Remove(bannedWord);
-                wordstatus = "wordRemoved";
+                wordstatus = "Word Removed";
             }
             return wordstatus;
         }

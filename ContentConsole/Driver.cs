@@ -16,24 +16,6 @@ namespace ContentConsole
             Menu();
         }
 
-        public static void Main(string[] args)
-        {
-            //Initalize the Banned Words Dictionary with default values
-            new Driver();
-            
-            //string content = "The weather in Manchester in winter is bad. It rains all the time - it must be horrible for people visiting.";
-            //System.Diagnostics.Debug.WriteLine(listOfPhrases.addPhraseToList(content));
-            //System.Diagnostics.Debug.WriteLine(listOfPhrases.addPhraseToList(content));
-                      
-
-            /*System.Diagnostics.Debug.WriteLine("Scanned the text:");
-            System.Diagnostics.Debug.WriteLine(content);
-            System.Diagnostics.Debug.WriteLine("Total Number of negative words: " + 0);
-
-            System.Diagnostics.Debug.WriteLine("Press ANY key to exit.");*/
-
-        }
-
         public void Menu() 
         {
             while (true) 
@@ -75,11 +57,25 @@ namespace ContentConsole
             }
         }
 
+        public void adminMenu()
+        {
+            Console.WriteLine("Select an action from below by chosing the number associated to your choice");
+            Console.WriteLine("1 : Show List Of Negative Word");
+            Console.WriteLine("2 : Add New Negative Word");
+            Console.WriteLine("3 : Remove Existing Negative Word");
+            Console.WriteLine("0 : Main Menu");
+        }
+
         public void setUpUser(int userType) 
         {
             switch(userType)
             {
                 case 1:
+                    /*user is able to input a new phrase
+                     *that phrase is then analyzed and the user is shown 
+                     *the number of Banned words that match Banned words in
+                     *the Banned words dictionary
+                     */
                     Console.WriteLine("Input a phrase to be analysed");
                     string inputText = Console.ReadLine();
 
@@ -88,12 +84,15 @@ namespace ContentConsole
                     Console.WriteLine(""+ inputText+"\n");
                     if (listOfPhrases.addPhraseToList(inputText)) 
                     {
-                        Console.WriteLine("Total Number of negative words: " + listOfPhrases.AnalayseAndCountNegWordsInPhrase(inputText));
+                        Console.WriteLine("Total Number of Banned words: " + listOfPhrases.AnalayseAndCountNegWordsInPhrase(inputText));
                     }
                     
                     break;
                 case 2:
-                    //Edit Banned Words Dictionary
+                    /*Edit Banned Words Dictionary
+                     * admin able to see all Banned words so they are able to check list of Banned words
+                     * then add or remove Banned words from the dictionary
+                    */
                     adminMenu();
                     string adminInput= Console.ReadLine();
 
@@ -150,6 +149,8 @@ namespace ContentConsole
 
                     break;
                 case 3:
+                    //Get List of all phrases with the Banned words sensitized
+                    //using foreach loop iterate and print each phrase in the list 
                     List<string> phrasesForReaders = listOfPhrases.sensitizePhrasesForReaders();
                     int phraseNumber = 0;
                     Console.WriteLine("Phrases for Readers : \n");
@@ -160,6 +161,8 @@ namespace ContentConsole
                     }
                     break;
                 case 4:
+                    //Get list of all phrases inserted by users without sensitizing the negative words
+                    //using foreach loop iterate and print each phrase in the list 
                     List<string> phrasesForContentCurator = listOfPhrases.getListOfPhrases();
 
                     foreach (var phrase in phrasesForContentCurator) 
@@ -173,13 +176,10 @@ namespace ContentConsole
             }
         }
 
-        public void adminMenu()
+        //starting call for program.
+        public static void Main(string[] args)
         {
-            Console.WriteLine("Select an action from below by chosing the number associated to your choice");
-            Console.WriteLine("1 : Show List Of Negative Word");
-            Console.WriteLine("2 : Add New Negative Word");
-            Console.WriteLine("3 : Remove Existing Negative Word");
-            Console.WriteLine("0 : Main Menu");
+            new Driver();
         }
 
     }
