@@ -16,12 +16,12 @@ namespace ContentConsole
         {
             if (ListOfBannedWords.Count() == 0)
             {
-                this.defaultWordsInDictionary();
+                this.DefaultWordsInDictionary();
             }
         }
         
         //Adding some default banned words to Dictionary
-        public void defaultWordsInDictionary()
+        public void DefaultWordsInDictionary()
         {
             ListOfBannedWords = new List<string>() 
             {
@@ -33,17 +33,17 @@ namespace ContentConsole
         }
 
         //Check If Banned Word Exists
-        public bool checkIfBannedWordExists(string bannedWord)
+        public bool CheckIfBannedWordExists(string bannedWord)
         {
             if (ListOfBannedWords.Contains(bannedWord)) { return true; }
             return false;
         }
         
         //Add new Word to Banned word dictionary 
-        public string addNewWord(string bannedWord) 
+        public string AddNewWord(string bannedWord) 
         {
             string newWordStatus = "Word Exists";
-            if (!checkIfBannedWordExists(bannedWord))
+            if (!CheckIfBannedWordExists(bannedWord))
             {
                 ListOfBannedWords.Add(bannedWord);
                 newWordStatus = "Word Added";
@@ -52,10 +52,10 @@ namespace ContentConsole
         }
 
         //Remove Word to Banned word dictionary 
-        public string removeNegWord(string bannedWord)
+        public string RemoveNegWord(string bannedWord)
         {
             string wordstatus = "Word Doesn't Exist";
-            if (checkIfBannedWordExists(bannedWord))
+            if (CheckIfBannedWordExists(bannedWord))
             {
                 ListOfBannedWords.Remove(bannedWord);
                 wordstatus = "Word Removed";
@@ -64,13 +64,13 @@ namespace ContentConsole
         }
 
         //Get Total Count of Banned words
-        public int numberOfBannedWords() 
+        public int NumberOfBannedWords() 
         {
             return ListOfBannedWords.Count();
         }
 
         //Hash Banned Word
-        public string hashBannedWord(string bannedword)
+        public string HashBannedWord(string bannedword)
         {
             char[] word = bannedword.ToCharArray();
             for (int i = 1; i < word.Count() - 1; i++)
@@ -81,7 +81,7 @@ namespace ContentConsole
         }
 
         /**Story 3**/
-        public List<string> hashOutBadWords(List<string> listOfBadWordsInPhrase)
+        public List<string> HashOutBadWords(List<string> listOfBadWordsInPhrase)
         {
             List<string> returnList = new List<string>();
             foreach (var word in listOfBadWordsInPhrase)

@@ -12,7 +12,7 @@ namespace ContentConsole
 
         public Driver() 
         {
-            dictionary.defaultWordsInDictionary();
+            dictionary.DefaultWordsInDictionary();
             Menu();
         }
 
@@ -82,7 +82,7 @@ namespace ContentConsole
 
                     Console.WriteLine("Scanned the text:");
                     Console.WriteLine(""+ inputText+"\n");
-                    if (listOfPhrases.addPhraseToList(inputText)) 
+                    if (listOfPhrases.AddPhraseToList(inputText)) 
                     {
                         Console.WriteLine("Total Number of Banned words: " + listOfPhrases.AnalayseAndCountNegWordsInPhrase(inputText));
                     }
@@ -129,7 +129,7 @@ namespace ContentConsole
                         {
                             Console.WriteLine("Input New Negative word to be added to list");
                             string newNegWord = Console.ReadLine();
-                            Console.WriteLine(dictionary.addNewWord(newNegWord));
+                            Console.WriteLine(dictionary.AddNewWord(newNegWord));
                             Console.WriteLine("");
                             setUpUser(2);
                         }
@@ -137,7 +137,7 @@ namespace ContentConsole
                         {
                             Console.WriteLine("Input New Negative word to be added to list");
                             string existingNegWord = Console.ReadLine();
-                            Console.WriteLine(dictionary.removeNegWord(existingNegWord) + "\n");
+                            Console.WriteLine(dictionary.RemoveNegWord(existingNegWord) + "\n");
                             setUpUser(2);
                         }
 
@@ -151,7 +151,7 @@ namespace ContentConsole
                 case 3:
                     //Get List of all phrases with the Banned words sensitized
                     //using foreach loop iterate and print each phrase in the list 
-                    List<string> phrasesForReaders = listOfPhrases.sensitizePhrasesForReaders();
+                    List<string> phrasesForReaders = listOfPhrases.SensitizePhrasesForReaders();
                     int phraseNumber = 0;
                     Console.WriteLine("Phrases for Readers : \n");
                     foreach (var phrase in phrasesForReaders) 
@@ -163,7 +163,7 @@ namespace ContentConsole
                 case 4:
                     //Get list of all phrases inserted by users without sensitizing the negative words
                     //using foreach loop iterate and print each phrase in the list 
-                    List<string> phrasesForContentCurator = listOfPhrases.getListOfPhrases();
+                    List<string> phrasesForContentCurator = listOfPhrases.GetListOfPhrases();
 
                     foreach (var phrase in phrasesForContentCurator) 
                     {
@@ -183,8 +183,4 @@ namespace ContentConsole
         }
 
     }
-
-    
-
-
 }

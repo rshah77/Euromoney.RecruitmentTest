@@ -18,13 +18,13 @@ namespace ContentConsole
 
         //Get the list of Phrases   
         //returns the Global List of phrases entered by users
-        public List<string> getListOfPhrases() 
+        public List<string> GetListOfPhrases() 
         {
             return ListOfPhrases;
         }
 
         //Gets the list of Banned words and checks the phrase parameter for any occurance of Banned words
-        public string addHashedPhrase(string phrase) 
+        public string AddHashedPhrase(string phrase) 
         {
             //uncomment the below line when running unit test
             //dwDict.defaultWordsInDictionary();
@@ -33,19 +33,19 @@ namespace ContentConsole
             {
                 if (phrase.ToLower().Contains(badWord))
                 {
-                    phrase = phrase.ToLower().Replace(badWord, new BannedWordsDictionary().hashBannedWord(badWord));
+                    phrase = phrase.ToLower().Replace(badWord, new BannedWordsDictionary().HashBannedWord(badWord));
                 }
             }
             return phrase;
         }
 
         //
-        public List<string> sensitizePhrasesForReaders() 
+        public List<string> SensitizePhrasesForReaders() 
         {
             ListOfHashedPhrases = new List<string>();
             foreach (var phrase in ListOfPhrases) 
             {
-                ListOfHashedPhrases.Add(addHashedPhrase(phrase));
+                ListOfHashedPhrases.Add(AddHashedPhrase(phrase));
             }
             return ListOfHashedPhrases;
         }
@@ -53,7 +53,7 @@ namespace ContentConsole
         //Adds a new phrase to the list of global list of phrases
         //returns true: to signify if the new phrase was added
         //or return false: if phrases is not added; that means phrase already exists
-        public bool addPhraseToList(string phrase) 
+        public bool AddPhraseToList(string phrase) 
         {
             //List<string> ListOfPhrasesInsertedByUsers = getListOfPhrases();
 
@@ -83,8 +83,6 @@ namespace ContentConsole
                 if (phrase.ToLower().Contains(badWord))
                 {
                     bannedWordsCounted++;
-                    //listOfBadWordsInPhrase.Add(badWord);
-                    //phrase = phrase.Replace(badWord, new BannedWordsDictionary().hashBannedWord(badWord));
                 }
             }
             return bannedWordsCounted;
